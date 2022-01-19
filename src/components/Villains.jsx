@@ -1,34 +1,108 @@
-import React, { Link, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import AddVillain from './AddVillain';
+import VillainModal from './VillainModal';
+import { Link } from 'react-router-dom'
+
 function Villains(props) {
     const [villains, setVillains] = useState([])
+    const [modalInfo, setModalInfo] = useState("")
+    const [show, setShow] = useState(false)
+    const [showAdd, setShowAdd] = useState(false)
+    const [searchString, setSearchString] = useState("")
+    
+    useEffect(() => {
+      getData();
+    }, [searchString])
+
+    function goThroughWords(words, str) {
+      let splitWords = words.split(" ");
+      let splitString = str.split(" ");
+      console.log(splitWords)
+      for (let i = 0; i < splitWords.length; i++) {
+        for (let j = 0; j < splitString.length; j++) {
+          if (
+            splitWords[i].startsWith(searchString) ||
+            splitWords[i] === splitString[j]
+            )
+            return true;
+        }
+      }
+    }
     
     function getData() {
-        axios.get(`http://localhost:8000/supervillains/`).then((res) => {
+        axios.get(`https://rocky-waters-42590.herokuapp.com/supervillains/`).then((res) => {
           const superVillainData = res.data;
-          setVillains(superVillainData)
-          console.log(superVillainData)
+          setSearchString(searchString.toLowerCase());
+          const tempVillains = superVillainData.filter(villain => {
+            if (villain.name.toLowerCase().includes(searchString) && goThroughWords(villain.name.toLowerCase(), searchString))
+              return true;
+            else
+              return false;
+          })
+          setVillains(tempVillains)
+          console.log(tempVillains)
         });
       }
+
+    function handleShowItem(data) {
+      setModalInfo(data);
+    }
+
+    function onClick(item) {
+      setShow(true);
+      handleShowItem(item);
+    }
+
+    function handleChange(event) {
+      setSearchString(event.target.value)
+    }
+
     return (
+      
         <div>
-            This is Villains
-            <button onClick={getData}>Villains</button>
+          <AddVillain
+              onClose={() => setShowAdd(false)}
+              showAdd={showAdd}
+              modalInfo={modalInfo}
+              setModalInfo={setModalInfo}
+              villains={villains}
+              setVillains={setVillains}
+            />
+            <button onClick={() => setShowAdd(true)}>Add Villain</button>
+            <input 
+              type="text" 
+              onChange={handleChange}
+              placeholder='search'
+            ></input>
             {villains.map(villain => {
               return (
-                <div>
-                  <div>
-                    <h1>{villain.name}</h1>
+                  <div key={villain.id}>
+                    <Link to={`supervillains/${villain.id}`}>
+                      <div>
+                        <div>
+                          <h1>{villain.name}</h1>
+                        </div>
+                        <div>
+                          <img src={villain.image_url} alt={villain.name} />
+                        </div>
+                      </div>
+                    </Link>
+                    <div>
+                      <button onClick={() => onClick(villain)}>Edit Villain Info</button>
+                    </div>
                   </div>
-                  <div>
-                    <img src={villain.image_url} alt={villain.name} />
-                  </div>
-                  <div>
-                    {villain.creators}
-                  </div>
-                </div>
+                
               )
             })}
+            <VillainModal
+              onClose={() => setShow(false)} 
+              show={show}
+              modalInfo={modalInfo}
+              setModalInfo={setModalInfo}
+              villains={villains}
+              setVillains={setVillains}
+            />
         </div>
     );
 }

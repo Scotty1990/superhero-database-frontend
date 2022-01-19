@@ -1,24 +1,24 @@
 import React from 'react';
 import axios from 'axios';
 
-function Modal(props) {
+function VillainModal(props) {
     if (!props.show) 
         return null;
 
-    function editSuperHeroInfo(event, id) {
-        axios.put(`https://rocky-waters-42590.herokuapp.com/superheroes/${id}`, props.modalInfo).then((res) => {
-            event.preventDefault();
-            const superHeroData = res.data;
-            props.setHeroes({...props.superHeroInfo, superHeroData});
+    function editSuperVillainInfo(event, id) {
+        axios.put(`https://rocky-waters-42590.herokuapp.com/supervillains/${id}`, props.modalInfo).then((res) => {
+            event.preventDefault();    
+            const superVillainData = res.data;
+            props.setVillains({...props.superVillainInfo, superVillainData});
             event.preventDefault();
         })
     }
 
-    function deleteHero(event, id) {
-        axios.delete(`https://rocky-waters-42590.herokuapp.com/superheroes/${id}`).then((res) => {
-            event.preventDefault();    
-            const superHeroData = res.data;
-            props.setHeroes(superHeroData);
+    function deleteVillain(event, id) {
+        axios.delete(`https://rocky-waters-42590.herokuapp.com/supervillains/${id}`).then((res) => {
+            event.preventDefault();
+            const superVillainData = res.data;
+            props.setVillains(superVillainData);
             event.preventDefault();
         })
     }
@@ -27,13 +27,10 @@ function Modal(props) {
         <div className='modal'>
             <div className='modal-content'>
                 <div className='modal-header'>
-                    <h4 className='modal-title'>{props.modalInfo.title}</h4>
+                    
                 </div>
                 <div className='modal-body'>
                     {props.modalInfo.description}
-                    <div className='location-div'>
-                        Location: {props.modalInfo.location}
-                    </div>
                 </div>
                 <div className='modal-footer'>
                     <form>
@@ -92,14 +89,14 @@ function Modal(props) {
                         <button 
                             className='edit-info-button' 
                             type="submit" 
-                            onClick={(event) => editSuperHeroInfo(event, props.modalInfo.id)} 
+                            onClick={(event) => editSuperVillainInfo(event, props.modalInfo.id)} 
                         >
                             Edit
                         </button>
                         <button 
-                            onClick={(event) => deleteHero(event, props.modalInfo.id)}
+                            onClick={(event) => deleteVillain(event, props.modalInfo.id)}
                         >
-                            Delete Hero
+                            Delete Villain
                         </button>
                     </form>
                     <button className='modal-button' onClick={props.onClose}>Close</button>
@@ -110,4 +107,4 @@ function Modal(props) {
     );
 }
 
-export default Modal;
+export default VillainModal;

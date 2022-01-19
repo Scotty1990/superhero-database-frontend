@@ -1,55 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Modal from './Modal';
+import AddHero from './AddHero'
 
 function Heroes(props) {
     const [heroes, setHeroes] = useState([])
     const [modalInfo, setModalInfo] = useState("")
     const [show, setShow] = useState(false)
+    const [showAdd, setShowAdd] = useState(false)
+    const [searchString, setSearchString] = useState("")
+    const [tempArr, setTempArr] = useState([])
+    
+    useEffect(() => {
+      getData();
+    }, [searchString])
 
-    const superPersonInfo = {
-      // aliases: 'none listed',
-      // alter_ego: 'Barry Allen',
-      // career: 'none listed',
-      // comics: 'none listed',
-      // creators: 'no creators listed',
-      // description: 'none listed',
-      image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjspaUfQA9lrBMCWrGSQDiLnGT9hvvFyTMIA&usqp=CAU'
-      // movies: 'none listed',
-      // name: 'The Flash',
-      // origin_story: 'none listed',
-      // other_forms_of_media: 'none listed',
-      // place_of_residence: 'none listed',
-      // powers: 'none listed'
+    function goThroughWords(words, str) {
+      let splitWords = words.split(" ");
+      let splitString = str.split(" ");
+      console.log(splitWords)
+      for (let i = 0; i < splitWords.length; i++) {
+        for (let j = 0; j < splitString.length; j++) {
+          if (
+            splitWords[i].startsWith(searchString) ||
+            splitWords[i] === splitString[j]
+            )
+            return true;
+        }
+      }
     }
 
     function getData() {
         axios.get("https://rocky-waters-42590.herokuapp.com/superheroes/").then((res) => {
           const superHeroData = res.data;
-          setHeroes(superHeroData)
-          console.log(superHeroData)
+          setSearchString(searchString.toLowerCase());
+          const tempHeroes = superHeroData.filter(hero => {
+            if (hero.name.toLowerCase().includes(searchString) && goThroughWords(hero.name.toLowerCase(), searchString))
+              return true;
+            else
+              return false;
+          })
+          setHeroes(tempHeroes)
+          console.log(tempHeroes)
         })
       }
-
-      function postHero(event) {
-        // event.preventDefault();
-        axios.post("https://rocky-waters-42590.herokuapp.com/superheroes/", modalInfo).then((res) => {
-          const superHeroData = res.data;
-          console.log("it's getting here")
-          setHeroes(heroes => [...heroes, superHeroData]);
-          console.log(heroes)
-          // event.preventDefault();
-        })
-      }
-
-    //   function editHeroInfo(event, id) {
-    //     axios.put(`https://rocky-waters-42590.herokuapp.com/superheroes/1`, superPersonInfo).then((res) => {
-    //       const superHeroData = res.data;
-    //       console.log("it's getting here")
-    //       setHeroes(heroes => [...heroes, superHeroData]);
-    //       console.log(heroes)
-    //     })
-    // }
 
     function handleShowItem(data) {
       setModalInfo(data);
@@ -60,23 +55,42 @@ function Heroes(props) {
       handleShowItem(item);
     }
 
+    function handleChange(event) {
+      setSearchString(event.target.value)
+    }
+
     return (
         <div>
-            This is Heroes
-            {/* <button onClick={editHeroInfo}>edit Flash</button> */}
-            <button onClick={getData}>Heroes</button>
+            <AddHero
+              onClose={() => setShowAdd(false)}
+              showAdd={showAdd}
+              modalInfo={modalInfo}
+              setModalInfo={setModalInfo}
+              heroes={heroes}
+              setHeroes={setHeroes}
+            />
+            <button onClick={() => setShowAdd(true)}>Add Hero</button>
+            <input 
+              type="text" 
+              onChange={handleChange}
+              placeholder='search'
+            ></input>
             {heroes.map(hero => {
               return (
-                <div onClick={() => onClick(hero)} key={hero.id}>
+                <div key={hero.id}>
+                  <Link to={`superheroes/${hero.id}`}>
+                    <div>
+                      <div>
+                        <h1>{hero.name}</h1>
+                      </div>
+                      <div>
+                        <img src={hero.image_url} alt={hero.name} />
+                      </div>
+                    </div>
+                  </Link>
                   <div>
-                    <h1>{hero.name}</h1>
-                  </div>
-                  <div>
-                    <img src={hero.image_url} alt={hero.name} />
-                  </div>
-                  <div>
-                    {hero.creators}
-                  </div>
+                    <button onClick={() => onClick(hero)}>Edit Hero Info</button>
+                  </div>          
                 </div>
               )
             })}
