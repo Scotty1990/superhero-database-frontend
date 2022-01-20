@@ -19,7 +19,6 @@ function Heroes(props) {
     function goThroughWords(words, str) {
       let splitWords = words.split(" ");
       let splitString = str.split(" ");
-      console.log(splitWords)
       for (let i = 0; i < splitWords.length; i++) {
         for (let j = 0; j < splitString.length; j++) {
           if (
@@ -31,18 +30,25 @@ function Heroes(props) {
       }
     }
 
+    function sortArray(a, b) {
+      if (a.name < b.name) return -1
+      if (a.name > b.name) return 1
+      return 0
+    }
+
     function getData() {
         axios.get("https://rocky-waters-42590.herokuapp.com/superheroes/").then((res) => {
-          const superHeroData = res.data;
+          let newData = res.data
+          // In order to sort an object, you have to make a function and pass it into the sort method
+          var s = newData.sort(sortArray)
           setSearchString(searchString.toLowerCase());
-          const tempHeroes = superHeroData.filter(hero => {
+          const tempHeroes = s.filter(hero => {
             if (hero.name.toLowerCase().includes(searchString) && goThroughWords(hero.name.toLowerCase(), searchString))
               return true;
             else
               return false;
           })
           setHeroes(tempHeroes)
-          console.log(tempHeroes)
         })
       }
 
