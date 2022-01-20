@@ -78,7 +78,7 @@ function Heroes(props) {
               heroes={heroes}
               setHeroes={setHeroes}
             />
-            <button onClick={() => setShowAdd(true)}>Add Hero</button>
+            <button className='add-button' onClick={() => setShowAdd(true)}>Add Hero</button>
             <input 
               type="text" 
               onChange={handleChange}
@@ -86,7 +86,7 @@ function Heroes(props) {
             ></input>
             {heroes.map(hero => {
               return (
-                <div key={hero.id}>
+                <div className='super-map' key={hero.id}>
                   <Link to={`superheroes/${hero.id}`}>
                     <div>
                       <div>

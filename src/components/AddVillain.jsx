@@ -7,11 +7,8 @@ function AddVillain(props) {
     
 function onClick(event) {
     axios.post(`${process.env.REACT_APP_API_URL}supervillains/`, props.modalInfo).then((res) => {
-        event.preventDefault();
         const superVillainData = res.data;
-        console.log("it's getting here")
         props.setVillains(villains => [...villains, superVillainData]);
-        console.log(props.villains)
     })
   }
     return (
@@ -21,7 +18,6 @@ function onClick(event) {
                     <h4 className='modal-title'>Add a Super Villain</h4>
                 </div>
                 <div className='modal-body'>
-                    Description
                 </div>
                 <div className='modal-footer'>
                     <form  >

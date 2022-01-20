@@ -80,7 +80,7 @@ function Villains(props) {
               villains={villains}
               setVillains={setVillains}
             />
-            <button onClick={() => setShowAdd(true)}>Add Villain</button>
+            <button className='add-button' onClick={() => setShowAdd(true)}>Add Villain</button>
             <input 
               type="text" 
               onChange={handleChange}
@@ -88,22 +88,21 @@ function Villains(props) {
             ></input>
             {villains.map(villain => {
               return (
+                <div className='super-map'>
                   <div key={villain.id}>
-                    <Link to={`supervillains/${villain.id}`}>
                       <div>
-                        <div>
-                          <h1>{villain.name}</h1>
-                        </div>
+                        <h1>{villain.name}</h1>
+                      </div>
+                      <Link to={`supervillains/${villain.id}`}>
                         <div>
                           <img src={villain.image_url} alt={villain.name} />
                         </div>
-                      </div>
-                    </Link>
+                      </Link>      
                     <div>
                       <button onClick={() => onClick(villain)}>Edit Villain Info</button>
                     </div>
                   </div>
-                
+                </div>
               )
             })}
             <VillainModal

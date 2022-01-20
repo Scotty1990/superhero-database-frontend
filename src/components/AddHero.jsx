@@ -7,11 +7,8 @@ function AddHero(props) {
 
     function onClick(event) {
         axios.post(`${process.env.REACT_APP_API_URL}superheroes/`, props.modalInfo).then((res) => {
-            // event.preventDefault();  
             const superHeroData = res.data;
-            console.log("it's getting here")
             props.setHeroes(heroes => [...heroes, superHeroData]);
-            console.log(props.heroes)
         })
       }
     return (
@@ -21,7 +18,7 @@ function AddHero(props) {
                     <h4 className='modal-title'>Add a Super Hero</h4>
                 </div>
                 <div className='modal-body'>
-                    Description
+                    
                 </div>
                 <div className='modal-footer'>
                     <form  >
