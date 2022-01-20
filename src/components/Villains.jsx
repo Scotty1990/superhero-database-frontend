@@ -10,6 +10,7 @@ function Villains(props) {
     const [show, setShow] = useState(false)
     const [showAdd, setShowAdd] = useState(false)
     const [searchString, setSearchString] = useState("")
+    let newString = ""
     
     useEffect(() => {
       getData();
@@ -20,11 +21,15 @@ function Villains(props) {
       let splitString = str.split(" ");
       for (let i = 0; i < splitWords.length; i++) {
         for (let j = 0; j < splitString.length; j++) {
+          console.log(splitWords[i])
+          console.log(splitString[j])
           if (
             splitWords[i].startsWith(searchString) ||
             splitWords[i] === splitString[j]
-            )
+            ) {
+              console.log(splitWords[i] + " , " + splitString[j])
             return true;
+            }
         }
       }
     }
@@ -40,9 +45,9 @@ function Villains(props) {
           let newData = res.data
           // In order to sort an object, you have to make a function and pass it into the sort method
           var s = newData.sort(sortArray)
-          setSearchString(searchString.toLowerCase());
+          let newString = searchString.toLowerCase();
           const tempVillains = s.filter(villain => {
-            if (villain.name.toLowerCase().includes(searchString) && goThroughWords(villain.name.toLowerCase(), searchString))
+            if (villain.name.toLowerCase().includes(newString) && goThroughWords(villain.name.toLowerCase(), newString))
               return true;
             else
               return false;

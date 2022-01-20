@@ -11,6 +11,7 @@ function Heroes(props) {
     const [showAdd, setShowAdd] = useState(false)
     const [searchString, setSearchString] = useState("")
     const [tempArr, setTempArr] = useState([])
+    let newString = ""
     
     useEffect(() => {
       getData();
@@ -21,6 +22,8 @@ function Heroes(props) {
       let splitString = str.split(" ");
       for (let i = 0; i < splitWords.length; i++) {
         for (let j = 0; j < splitString.length; j++) {
+          console.log(splitWords[i])
+          console.log(splitString[j])
           if (
             splitWords[i].startsWith(searchString) ||
             splitWords[i] === splitString[j]
@@ -41,9 +44,9 @@ function Heroes(props) {
           let newData = res.data
           // In order to sort an object, you have to make a function and pass it into the sort method
           var s = newData.sort(sortArray)
-          setSearchString(searchString.toLowerCase());
+          newString = searchString.toLowerCase()
           const tempHeroes = s.filter(hero => {
-            if (hero.name.toLowerCase().includes(searchString) && goThroughWords(hero.name.toLowerCase(), searchString))
+            if (hero.name.toLowerCase().includes(newString) && goThroughWords(hero.name.toLowerCase(), newString))
               return true;
             else
               return false;
