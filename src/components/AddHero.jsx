@@ -6,7 +6,7 @@ function AddHero(props) {
         return null;
 
     function onClick(event) {
-        axios.post("https://rocky-waters-42590.herokuapp.com/superheroes/", props.modalInfo).then((res) => {
+        axios.post(`${process.env.REACT_APP_API_URL}superheroes/`, props.modalInfo).then((res) => {
             event.preventDefault();  
             const superHeroData = res.data;
             console.log("it's getting here")

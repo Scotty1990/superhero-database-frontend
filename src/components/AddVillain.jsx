@@ -6,7 +6,7 @@ function AddVillain(props) {
     return null;
     
 function onClick(event) {
-    axios.post("https://rocky-waters-42590.herokuapp.com/supervillains/", props.modalInfo).then((res) => {
+    axios.post(`${process.env.REACT_APP_API_URL}supervillains/`, props.modalInfo).then((res) => {
         event.preventDefault();
         const superVillainData = res.data;
         console.log("it's getting here")

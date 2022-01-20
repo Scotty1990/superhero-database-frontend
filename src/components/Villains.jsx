@@ -36,7 +36,7 @@ function Villains(props) {
     }
     
     function getData() {
-        axios.get(`https://rocky-waters-42590.herokuapp.com/supervillains/`).then((res) => {
+        axios.get(`${process.env.REACT_APP_API_URL}supervillains/`).then((res) => {
           let newData = res.data
           // In order to sort an object, you have to make a function and pass it into the sort method
           var s = newData.sort(sortArray)

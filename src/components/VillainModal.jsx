@@ -6,7 +6,7 @@ function VillainModal(props) {
         return null;
 
     function editSuperVillainInfo(event, id) {
-        axios.put(`https://rocky-waters-42590.herokuapp.com/supervillains/${id}`, props.modalInfo).then((res) => {
+        axios.put(`${process.env.REACT_APP_API_URL}supervillains/${id}`, props.modalInfo).then((res) => {
             event.preventDefault();    
             const superVillainData = res.data;
             props.setVillains({...props.superVillainInfo, superVillainData});
@@ -15,7 +15,7 @@ function VillainModal(props) {
     }
 
     function deleteVillain(event, id) {
-        axios.delete(`https://rocky-waters-42590.herokuapp.com/supervillains/${id}`).then((res) => {
+        axios.delete(`${process.env.REACT_APP_API_URL}supervillains/${id}`).then((res) => {
             event.preventDefault();
             const superVillainData = res.data;
             props.setVillains(superVillainData);

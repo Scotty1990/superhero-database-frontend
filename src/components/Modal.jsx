@@ -6,7 +6,7 @@ function Modal(props) {
         return null;
 
     function editSuperHeroInfo(event, id) {
-        axios.put(`https://rocky-waters-42590.herokuapp.com/superheroes/${id}`, props.modalInfo).then((res) => {
+        axios.put(`${process.env.REACT_APP_API_URL}superheroes/${id}`, props.modalInfo).then((res) => {
             event.preventDefault();
             const superHeroData = res.data;
             props.setHeroes({...props.superHeroInfo, superHeroData});
@@ -15,7 +15,7 @@ function Modal(props) {
     }
 
     function deleteHero(event, id) {
-        axios.delete(`https://rocky-waters-42590.herokuapp.com/superheroes/${id}`).then((res) => {
+        axios.delete(`${process.env.REACT_APP_API_URL}superheroes/${id}`).then((res) => {
             event.preventDefault();    
             const superHeroData = res.data;
             props.setHeroes(superHeroData);
