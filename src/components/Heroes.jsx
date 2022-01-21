@@ -21,8 +21,8 @@ function Heroes(props) {
       let splitString = str.split(" ");
       for (let i = 0; i < splitWords.length; i++) {
         for (let j = 0; j < splitString.length; j++) {
-          console.log(splitWords[i])
-          console.log(splitString[j])
+          // console.log(splitWords[i])
+          // console.log(splitString[j])
           if (
             splitWords[i].startsWith(searchString) ||
             splitWords[i] === splitString[j]
