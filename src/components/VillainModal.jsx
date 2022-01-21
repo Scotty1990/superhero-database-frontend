@@ -95,6 +95,7 @@ function VillainModal(props) {
                         </button>
                         <button 
                             onClick={(event) => deleteVillain(event, props.modalInfo.id)}
+                            className='delete-button'
                         >
                             Delete Villain
                         </button>

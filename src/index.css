@@ -13,7 +13,7 @@ code {
     monospace;
 }
 
-button {
+button:not(.edit-info-button, .delete-button, .modal-button) {
   background-color: #4c98af;
   border: none;
   color: white;

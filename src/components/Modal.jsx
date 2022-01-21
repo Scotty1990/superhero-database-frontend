@@ -98,6 +98,7 @@ function Modal(props) {
                         </button>
                         <button 
                             onClick={(event) => deleteHero(event, props.modalInfo.id)}
+                            className='delete-button'
                         >
                             Delete Hero
                         </button>
