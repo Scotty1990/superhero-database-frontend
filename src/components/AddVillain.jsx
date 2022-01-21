@@ -9,6 +9,7 @@ function onClick(event) {
     axios.post(`${process.env.REACT_APP_API_URL}supervillains/`, props.modalInfo).then((res) => {
         const superVillainData = res.data;
         props.setVillains(villains => [...villains, superVillainData]);
+        event.preventDefault();
     })
   }
     return (

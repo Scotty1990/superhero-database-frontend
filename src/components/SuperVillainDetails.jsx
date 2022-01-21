@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 function SuperVillainDetails(props) {
     const [villain, setVillain] = useState([])
     useEffect(() => {
-        fetch(`https://rocky-waters-42590.herokuapp.com/supervillains/${props.match.params.id}`)
+        fetch(`${process.env.REACT_APP_API_URL}supervillains/${props.match.params.id}`)
         .then(res => res.json())
         .then(json => {
             setVillain(json);

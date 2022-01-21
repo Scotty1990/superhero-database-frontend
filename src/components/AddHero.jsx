@@ -9,6 +9,7 @@ function AddHero(props) {
         axios.post(`${process.env.REACT_APP_API_URL}superheroes/`, props.modalInfo).then((res) => {
             const superHeroData = res.data;
             props.setHeroes(heroes => [...heroes, superHeroData]);
+            event.preventDefault();
         })
       }
     return (

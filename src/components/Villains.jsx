@@ -24,7 +24,7 @@ function Villains(props) {
           // console.log(splitWords[i])
           // console.log(splitString[j])
           if (
-            splitWords[i].startsWith(searchString) ||
+            splitWords[i].startsWith(searchString.toLowerCase()) ||
             splitWords[i] === splitString[j]
             ) {
               // console.log(splitWords[i] + " , " + splitString[j])

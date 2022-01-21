@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 function SuperHeroDetails(props) {
     const [hero, setHero] = useState([])
     useEffect(() => {
-        fetch(`https://rocky-waters-42590.herokuapp.com/superheroes/${props.match.params.id}`)
+        fetch(`${process.env.REACT_APP_API_URL}superheroes/${props.match.params.id}`)
         .then(res => res.json())
         .then(json => {
             setHero(json);
@@ -15,15 +15,19 @@ function SuperHeroDetails(props) {
         <div>
             <a href="/heroes">Back</a>
             <div>
-                <h4>Name</h4>
-                {hero.name}
+                <h1>{hero.name}</h1>
+            </div>
+            <div className='detail-img'>
+                <img src={hero.image_url} alt={hero.name} />
+                
             </div>
             <div>
                 <h4>Alter Ego</h4>
                 {hero.alter_ego}
             </div>
             <div>
-                <img src={hero.image_url} alt={hero.name} />
+                <h4>Aliases</h4>
+                {hero.aliases}
             </div>
             <div>
                 <h4>Creators</h4>
@@ -34,24 +38,20 @@ function SuperHeroDetails(props) {
                 {hero.place_of_residence}
             </div>
             <div>
+                <h4>Career</h4>
+                {hero.career}
+            </div>
+            <div>
+                <h4>Powers / Abilities</h4>
+                {hero.powers}
+            </div>
+            <div>
                 <h4>Description</h4>
                 {hero.description}
             </div>
             <div>
                 <h4>Origin Story</h4>
                 {hero.origin_story}
-            </div>
-            <div>
-                <h4>Career</h4>
-                {hero.career}
-            </div>
-            <div>
-                <h4>Aliases</h4>
-                {hero.aliases}
-            </div>
-            <div>
-                <h4>Powers / Abilities</h4>
-                {hero.powers}
             </div>
             <div>
                 <h4>Comics</h4>
