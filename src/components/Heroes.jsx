@@ -10,7 +10,6 @@ function Heroes(props) {
     const [show, setShow] = useState(false)
     const [showAdd, setShowAdd] = useState(false)
     const [searchString, setSearchString] = useState("")
-    const [tempArr, setTempArr] = useState([])
     let newString = ""
     
     useEffect(() => {
