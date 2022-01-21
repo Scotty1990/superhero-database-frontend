@@ -12,6 +12,9 @@ function Heroes(props) {
     const [searchString, setSearchString] = useState("")
     let newString = ""
     
+    if (heroes == null)
+      getData()
+      
     useEffect(() => {
       getData();
     }, [searchString])
@@ -38,7 +41,7 @@ function Heroes(props) {
       return 0
     }
 
-    function getData() {
+    function getData(event) {
         axios.get(`${process.env.REACT_APP_API_URL}superheroes/`).then((res) => {
           let newData = res.data
           // In order to sort an object, you have to make a function and pass it into the sort method

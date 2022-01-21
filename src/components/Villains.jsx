@@ -12,6 +12,9 @@ function Villains(props) {
     const [searchString, setSearchString] = useState("")
     let newString = ""
     
+    if (villains == null)
+      getData()
+
     useEffect(() => {
       getData();
     }, [searchString])

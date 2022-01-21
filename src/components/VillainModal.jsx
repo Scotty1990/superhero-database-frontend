@@ -7,19 +7,21 @@ function VillainModal(props) {
 
     function editSuperVillainInfo(event, id) {
         axios.put(`${process.env.REACT_APP_API_URL}supervillains/${id}`, props.modalInfo).then((res) => {
-            event.preventDefault();    
+            // event.preventDefault();    
             const superVillainData = res.data;
             props.setVillains({...props.superVillainInfo, superVillainData});
-            event.preventDefault();
+            window.location.reload()
+            // event.preventDefault();
         })
     }
 
     function deleteVillain(event, id) {
         axios.delete(`${process.env.REACT_APP_API_URL}supervillains/${id}`).then((res) => {
-            event.preventDefault();
+            // event.preventDefault();
             const superVillainData = res.data;
             props.setVillains(superVillainData);
-            event.preventDefault();
+            window.location.reload();
+            // event.preventDefault();
         })
     }
     

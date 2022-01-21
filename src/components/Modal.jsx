@@ -7,19 +7,21 @@ function Modal(props) {
 
     function editSuperHeroInfo(event, id) {
         axios.put(`${process.env.REACT_APP_API_URL}superheroes/${id}`, props.modalInfo).then((res) => {
-            event.preventDefault();
+            // event.preventDefault();
             const superHeroData = res.data;
             props.setHeroes({...props.superHeroInfo, superHeroData});
-            event.preventDefault();
+            window.location.reload()
+            // event.preventDefault();
         })
     }
 
     function deleteHero(event, id) {
         axios.delete(`${process.env.REACT_APP_API_URL}superheroes/${id}`).then((res) => {
-            event.preventDefault();    
+            // event.preventDefault();    
             const superHeroData = res.data;
             props.setHeroes(superHeroData);
-            event.preventDefault();
+            // event.preventDefault();
+            window.location.reload()
         })
     }
     

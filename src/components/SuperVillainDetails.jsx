@@ -19,11 +19,15 @@ function SuperVillainDetails(props) {
                 {villain.name}
             </div>
             <div>
+                <img src={villain.image_url} alt={villain.name} />
+            </div>
+            <div>
                 <h4>Alter Ego</h4>
                 {villain.alter_ego}
             </div>
             <div>
-                <img src={villain.image_url} alt={villain.name} />
+                <h4>Aliases</h4>
+                {villain.aliases}
             </div>
             <div>
                 <h4>Creators</h4>
@@ -38,20 +42,16 @@ function SuperVillainDetails(props) {
                 {villain.description}
             </div>
             <div>
-                <h4>Origin Story</h4>
-                {villain.origin_story}
-            </div>
-            <div>
                 <h4>Career</h4>
                 {villain.career}
             </div>
             <div>
-                <h4>Aliases</h4>
-                {villain.aliases}
-            </div>
-            <div>
                 <h4>Powers / Abilities</h4>
                 {villain.powers}
+            </div>
+            <div>
+                <h4>Origin Story</h4>
+                {villain.origin_story}
             </div>
             <div>
                 <h4>Comics</h4>

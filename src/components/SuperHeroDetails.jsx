@@ -17,9 +17,8 @@ function SuperHeroDetails(props) {
             <div>
                 <h1>{hero.name}</h1>
             </div>
-            <div className='detail-img'>
+            <div>
                 <img src={hero.image_url} alt={hero.name} />
-                
             </div>
             <div>
                 <h4>Alter Ego</h4>
@@ -38,16 +37,16 @@ function SuperHeroDetails(props) {
                 {hero.place_of_residence}
             </div>
             <div>
+                <h4>Description</h4>
+                {hero.description}
+            </div>
+            <div>
                 <h4>Career</h4>
                 {hero.career}
             </div>
             <div>
                 <h4>Powers / Abilities</h4>
                 {hero.powers}
-            </div>
-            <div>
-                <h4>Description</h4>
-                {hero.description}
             </div>
             <div>
                 <h4>Origin Story</h4>
