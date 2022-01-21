@@ -21,13 +21,13 @@ function Villains(props) {
       let splitString = str.split(" ");
       for (let i = 0; i < splitWords.length; i++) {
         for (let j = 0; j < splitString.length; j++) {
-          console.log(splitWords[i])
-          console.log(splitString[j])
+          // console.log(splitWords[i])
+          // console.log(splitString[j])
           if (
             splitWords[i].startsWith(searchString) ||
             splitWords[i] === splitString[j]
             ) {
-              console.log(splitWords[i] + " , " + splitString[j])
+              // console.log(splitWords[i] + " , " + splitString[j])
             return true;
             }
         }
@@ -88,19 +88,17 @@ function Villains(props) {
             ></input>
             {villains.map(villain => {
               return (
-                <div className='super-map'>
-                  <div key={villain.id}>
-                      <div>
-                        <h1>{villain.name}</h1>
-                      </div>
-                      <Link to={`supervillains/${villain.id}`}>
-                        <div>
-                          <img src={villain.image_url} alt={villain.name} />
-                        </div>
-                      </Link>      
+                <div key={villain.id}>
                     <div>
-                      <button onClick={() => onClick(villain)}>Edit Villain Info</button>
+                      <h1>{villain.name}</h1>
                     </div>
+                    <Link to={`supervillains/${villain.id}`}>
+                      <div>
+                        <img src={villain.image_url} alt={villain.name} />
+                      </div>
+                    </Link>      
+                  <div>
+                    <button onClick={() => onClick(villain)}>Edit Villain Info</button>
                   </div>
                 </div>
               )

@@ -3,9 +3,9 @@ import { Route } from 'react-router-dom';
 import Nav from './components/Nav';
 import Heroes from './components/Heroes';
 import Villains from './components/Villains';
-import { useState } from 'react'
 import SuperHeroDetails from './components/SuperHeroDetails';
 import SuperVillainDetails from './components/SuperVillainDetails';
+import HomePage from './components/HomePage';
 
 function App() {
   // const [heroes, setHeroes] = useState([])
@@ -14,6 +14,7 @@ function App() {
       <header>
         <Nav />
       </header>
+      <Route exact path='/' component={HomePage} />
       <Route exact path="/heroes" component={Heroes} />
       <Route exact path="/villains" component={Villains} />
       <Route
