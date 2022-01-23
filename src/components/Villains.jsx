@@ -12,8 +12,12 @@ function Villains(props) {
     const [searchString, setSearchString] = useState("")
     let newString = ""
     
-    if (villains == null)
-      getData()
+    // useEffect(() => {
+    //   if (window.location.href.endsWith("?")) {
+    //     // window.location.reload()
+    //     window.location.href = "http://localhost:3000/villains?&"
+    //   }
+    // }, [villains])
 
     useEffect(() => {
       getData();
@@ -48,7 +52,7 @@ function Villains(props) {
           let newData = res.data
           // In order to sort an object, you have to make a function and pass it into the sort method
           var s = newData.sort(sortArray)
-          let newString = searchString.toLowerCase();
+          newString = searchString.toLowerCase();
           const tempVillains = s.filter(villain => {
             if (villain.name.toLowerCase().includes(newString) && goThroughWords(villain.name.toLowerCase(), newString))
               return true;

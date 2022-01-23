@@ -11,9 +11,6 @@ function Heroes(props) {
     const [showAdd, setShowAdd] = useState(false)
     const [searchString, setSearchString] = useState("")
     let newString = ""
-    
-    if (heroes == null)
-      getData()
       
     useEffect(() => {
       getData();
@@ -86,6 +83,7 @@ function Heroes(props) {
               onChange={handleChange}
               placeholder='search'
             ></input>
+            <button onClick={getData}>Search</button>
             {heroes.map(hero => {
               return (
                 <div className='super-map' key={hero.id}>

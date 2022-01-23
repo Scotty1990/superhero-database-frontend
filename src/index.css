@@ -64,6 +64,15 @@ a {
   border-bottom: 1px solid #eee;
 }
 
-.detail-img {
-  float: right;
+.container {
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
+  width: 470px;
+  clear: both;
+}
+
+.container input {
+  width: 100%;
+  margin: 5px;
+  clear: both;
 }
