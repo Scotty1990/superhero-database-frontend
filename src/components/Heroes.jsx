@@ -83,7 +83,6 @@ function Heroes(props) {
               onChange={handleChange}
               placeholder='search'
             ></input>
-            <button onClick={getData}>Search</button>
             {heroes.map(hero => {
               return (
                 <div className='super-map' key={hero.id}>
